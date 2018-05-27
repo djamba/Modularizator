@@ -25,7 +25,7 @@ public class ComponentsHolderImpl implements ComponentsHolder {
 	}
 
 	public void init() {
-		AppComponent appComponent = DaggerAppComponent.builder().appModule(new AppModule(context)).build();
+		AppComponent appComponent = DaggerAppComponent.builder().appModule(new AppModule(context, this)).build();
 		appComponent.injectComponentsHolder(this);
 		components = new HashMap<>();
 	}

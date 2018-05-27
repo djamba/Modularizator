@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import ru.roman.home.core.BaseActivity;
 import ru.roman.home.core.di.ComponentsHolder;
+import ru.roman.home.featureone.FeatureOneInteractor;
 import ru.roman.home.featureone.R;
 import ru.roman.home.featureone.details.di.FeatureOneDetailModule;
 
@@ -16,8 +17,8 @@ public class FeatureOneDetailActivity extends BaseActivity {
 		context.startActivity(new Intent(context, FeatureOneDetailActivity.class));
 	}
 
-//	@Inject
-//	FeatureOneViewModel parentViewModel;
+	@Inject
+	FeatureOneInteractor interactor;
 
 	@Inject
 	FeatureOneDetailViewModel viewModel;
