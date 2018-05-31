@@ -14,6 +14,7 @@ import java.util.Map;
 public class ComponentsHolderImpl implements ComponentsHolder {
 
 	private final Context context;
+	private AppComponent appComponent;
 
 	@Inject
 	Map<Class<?>, Provider<FeatureComponentBuilder>> builders;
@@ -24,10 +25,14 @@ public class ComponentsHolderImpl implements ComponentsHolder {
 		this.context = context;
 	}
 
-	public void init() {
-		AppComponent appComponent = DaggerAppComponent.builder().appModule(new AppModule(context, this)).build();
-		appComponent.injectComponentsHolder(this);
-		components = new HashMap<>();
+	public void init(AppComponent appComponent) {
+		this.appComponent = appComponent;
+		this.components = new HashMap<>();
+	}
+
+	public void initSession() {
+		SessionComponent sessionComponent = appComponent.plus(new SessionModule());
+		sessionComponent.injectComponentsHolder(this);
 	}
 
 	@Override
