@@ -11,5 +11,7 @@ public interface ComponentsHolder {
 
 	FeatureComponent getFeatureComponent(Class<?> cls, FeatureModule module);
 
+	FeatureComponent getFeatureComponent(Class<?> parentCls, Class<?> cls, FeatureModule module);
+
 	void releaseFeatureComponent(Class<?> cls);
 }

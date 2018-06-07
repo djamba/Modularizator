@@ -1,24 +1,25 @@
 package ru.roman.home.core;
 
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.v7.app.AppCompatActivity;
 import ru.roman.home.core.di.ComponentsHolder;
 import ru.roman.home.core.di.ComponentsHolderOwner;
-import ru.roman.home.core.di.FeatureComponent;
+import ru.roman.home.core.di.DiInjector;
 
 public class BaseActivity extends AppCompatActivity {
 
-	private FeatureComponent<?> featureComponent;
+	private Class<?> classKeyComponent;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		onInject(((ComponentsHolderOwner) getApplication()).getComponentsHolder(), savedInstanceState);
+		classKeyComponent = onInject(((ComponentsHolderOwner) getApplication()).getInjector(), savedInstanceState);
 	}
 
 	@Override
-	public void onDestroy() {
+	protected void onDestroy() {
 		super.onDestroy();
 
 		if (isFinishing()) {
@@ -26,9 +27,14 @@ public class BaseActivity extends AppCompatActivity {
 		}
 	}
 
-	protected void onInject(ComponentsHolder componentsHolder, Bundle state) {
+	protected Class<?> onInject(DiInjector injector, Bundle state) {
+		return null;
 	}
 
-	protected void onRelease(ComponentsHolder componentsHolder) {
+	@CallSuper
+	protected void onRelease(final ComponentsHolder componentsHolder) {
+		if (classKeyComponent != null) {
+			componentsHolder.releaseFeatureComponent(classKeyComponent);
+		}
 	}
 }

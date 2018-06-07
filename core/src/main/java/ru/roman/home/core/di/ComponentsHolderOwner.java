@@ -8,4 +8,6 @@ package ru.roman.home.core.di;
 public interface ComponentsHolderOwner {
 
 	ComponentsHolder getComponentsHolder();
+
+	DiInjector getInjector();
 }

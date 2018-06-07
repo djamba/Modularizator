@@ -2,8 +2,7 @@ package ru.roman.home.featuretwo;
 
 import android.os.Bundle;
 import ru.roman.home.core.BaseActivity;
-import ru.roman.home.core.di.ComponentsHolder;
-import ru.roman.home.featuretwo.di.FeatureTwoModule;
+import ru.roman.home.core.di.DiInjector;
 
 import javax.inject.Inject;
 
@@ -18,14 +17,7 @@ public class FeatureTwoActivity extends BaseActivity {
 	}
 
 	@Override
-	protected void onInject(ComponentsHolder componentsHolder, Bundle state) {
-
-		componentsHolder.getFeatureComponent(getClass(), new FeatureTwoModule()).inject(this);
-	}
-
-	@Override
-	protected void onRelease(ComponentsHolder componentsHolder) {
-
-		componentsHolder.releaseFeatureComponent(getClass());
+	protected Class<?> onInject(final DiInjector injector, final Bundle state) {
+		return injector.inject(this);
 	}
 }

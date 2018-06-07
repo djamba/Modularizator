@@ -2,13 +2,15 @@ package ru.roman.home.modularizator.di;
 
 import dagger.Component;
 import ru.roman.home.core.di.AppScope;
+import ru.roman.home.core.di.FeatureComponent;
 import ru.roman.home.modularizator.App;
 
 @AppScope
 @Component(modules = AppModule.class)
-public interface AppComponent {
+public interface AppComponent extends FeatureComponent<App> {
 
-	SessionComponent plus(SessionModule module);
+	SessionComponent.Builder sessionComponent();
 
-	void injectApp(App app);
+	@Override
+	void inject(App app);
 }

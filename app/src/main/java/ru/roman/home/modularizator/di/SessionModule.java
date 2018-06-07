@@ -5,6 +5,7 @@ import dagger.Provides;
 import ru.roman.home.core.di.SessionScope;
 import ru.roman.home.core.di.SessionToken;
 import ru.roman.home.featureone.details.di.FeatureOneComponentsBinding;
+import ru.roman.home.featuretwo.di.FeatureTwoComponentBinding;
 
 import java.util.UUID;
 

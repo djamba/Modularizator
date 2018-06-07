@@ -4,8 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import ru.roman.home.core.BaseActivity;
-import ru.roman.home.core.di.ComponentsHolder;
+import ru.roman.home.core.di.DiInjector;
 import ru.roman.home.core.di.SessionToken;
+import ru.roman.home.featureone.FeatureOneActivity;
 import ru.roman.home.featureone.FeatureOneInteractor;
 import ru.roman.home.featureone.R;
 import ru.roman.home.featureone.details.di.FeatureOneDetailModule;
@@ -35,14 +36,7 @@ public class FeatureOneDetailActivity extends BaseActivity {
 	}
 
 	@Override
-	protected void onInject(ComponentsHolder componentsHolder, Bundle state) {
-
-		componentsHolder.getFeatureComponent(getClass(), new FeatureOneDetailModule()).inject(this);
-	}
-
-	@Override
-	protected void onRelease(ComponentsHolder componentsHolder) {
-
-		componentsHolder.releaseFeatureComponent(getClass());
+	protected Class<?> onInject(final DiInjector injector, final Bundle state) {
+		return injector.inject(FeatureOneActivity.class, this, new FeatureOneDetailModule());
 	}
 }

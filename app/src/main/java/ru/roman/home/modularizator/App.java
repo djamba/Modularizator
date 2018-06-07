@@ -4,6 +4,7 @@ import android.app.Application;
 import ru.roman.home.core.Session;
 import ru.roman.home.core.di.ComponentsHolder;
 import ru.roman.home.core.di.ComponentsHolderOwner;
+import ru.roman.home.core.di.DiInjector;
 import ru.roman.home.modularizator.di.AppComponent;
 import ru.roman.home.modularizator.di.AppModule;
 import ru.roman.home.modularizator.di.ComponentsHolderImpl;
@@ -20,7 +21,7 @@ public class App extends Application implements ComponentsHolderOwner, Session {
 		componentsHolder = new ComponentsHolderImpl(this);
 
 		AppComponent appComponent = DaggerAppComponent.builder().appModule(new AppModule(this, componentsHolder)).build();
-		appComponent.injectApp(this);
+		appComponent.inject(this);
 		componentsHolder.init(appComponent);
 
 		createSession();
@@ -28,6 +29,11 @@ public class App extends Application implements ComponentsHolderOwner, Session {
 
 	@Override
 	public ComponentsHolder getComponentsHolder() {
+		return componentsHolder;
+	}
+
+	@Override
+	public DiInjector getInjector() {
 		return componentsHolder;
 	}
 
