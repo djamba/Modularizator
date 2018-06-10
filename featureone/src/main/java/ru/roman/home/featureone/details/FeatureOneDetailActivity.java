@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import ru.roman.home.core.BaseActivity;
+import ru.roman.home.core.PersistentLifeCycle;
 import ru.roman.home.core.di.DiInjector;
 import ru.roman.home.core.di.SessionToken;
 import ru.roman.home.featureone.FeatureOneActivity;
@@ -35,8 +36,14 @@ public class FeatureOneDetailActivity extends BaseActivity {
 		setContentView(R.layout.activity_feature_one_detail);
 	}
 
+	@Inject
 	@Override
-	protected Class<?> onInject(final DiInjector injector, final Bundle state) {
+	protected void setPersistentLifeCycle(PersistentLifeCycle lifeCycle) {
+		super.setPersistentLifeCycle(lifeCycle);
+	}
+
+	@Override
+	protected Class<?> onInject(final DiInjector injector) {
 		return injector.inject(FeatureOneActivity.class, this, new FeatureOneDetailModule());
 	}
 }

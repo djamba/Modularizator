@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import ru.roman.home.core.BaseActivity;
 import ru.roman.home.core.Session;
-import ru.roman.home.core.di.DiInjector;
 import ru.roman.home.featureone.details.FeatureOneDetailActivity;
 
 import javax.inject.Inject;
@@ -27,10 +26,5 @@ public class FeatureOneActivity extends BaseActivity {
 				FeatureOneDetailActivity.start(FeatureOneActivity.this);
 			}
 		});
-	}
-
-	@Override
-	protected Class<?> onInject(final DiInjector injector, final Bundle state) {
-		return injector.inject(this);
 	}
 }

@@ -1,7 +1,9 @@
 package ru.roman.home.featureone.details.di;
 
+import android.util.Log;
 import dagger.Module;
 import dagger.Provides;
+import ru.roman.home.core.PersistentLifeCycle;
 import ru.roman.home.core.di.FeatureComponent;
 import ru.roman.home.core.di.FeatureDetailScope;
 import ru.roman.home.core.di.FeatureModule;
@@ -22,5 +24,21 @@ public class FeatureOneDetailModule implements FeatureModule {
 	@FeatureDetailScope
 	FeatureOneDetailViewModel provideFeatureOneDetailViewModel(FeatureOneInteractor interactor) {
 		return new FeatureOneDetailViewModel(new FeatureOneInteractor());
+	}
+
+	@Provides
+	@FeatureDetailScope
+	PersistentLifeCycle providePersistentLifeCycle() {
+		return new PersistentLifeCycle() {
+			@Override
+			public void init() {
+				Log.d("FeatureOneDetailModule", "PersistentLifeCycle::init()");
+			}
+
+			@Override
+			public void dispose() {
+				Log.d("FeatureOneDetailModule", "PersistentLifeCycle::dispose()");
+			}
+		};
 	}
 }
